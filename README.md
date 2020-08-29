@@ -1,4 +1,4 @@
-### Get Coordinates with Google Maps and OpenStreetMap
+### Manage projects and tasks using RESTful API
 
 Technologies:
 - PHP >= 7.4
