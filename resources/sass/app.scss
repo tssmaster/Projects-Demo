@@ -1,0 +1,38 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.headcolor {
+   background-color: #2a73b0;
+   color: #fff;
+}
+
+.bg-grey{
+   background-color: #f3f3f3;
+}
+
+.table-bordered td {border: none !important; border-right: solid 1px #ccc !important;}
+
+.h-divider{
+     margin-top:5px;
+     margin-bottom:5px;
+     height:1px;
+     width:100%;
+     border-top:1px solid gray;
+}
+
+.v-divider{
+     display:inline-block;
+     margin-left:5px;
+     margin-right:5px;
+     margin-bottom: 4px;
+     width:1px;
+     height:17px;
+     border-left:1px solid #aaa;
+     vertical-align: bottom;
+}
