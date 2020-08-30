@@ -33,6 +33,6 @@ Description:
 - API models: /app/Projects.php, /app/Tasks.php
 - API controllers: /app/Http/Controllers/ProjectsController.php, /app/Http/Controllers/TasksController.php
 - API routes are defined in /routes/api.php 
-- Front web controllers are: /app/Http/Controllers/ProjectsFrontController.php, /app/Http/Controllers/TasksFronController.php
+- Front web controllers are: /app/Http/Controllers/ProjectsFrontController.php, /app/Http/Controllers/TasksFrontController.php
 - The web routes are defined in /routes/web.php
 - The blade templates are in /resources/views
