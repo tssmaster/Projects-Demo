@@ -1,13 +1,13 @@
 ### Manage projects and tasks using RESTful API
 
 Technologies:
-- PHP >= 7.4
+- PHP
 - Laravel
 - MySQL
 - Bootstrap
 
 Installation:
-- You need to have installed XAMPP or similar package with PHP >= 7.2 (This project is created and tested with PHP version 7.4.9)
+- You need to have installed XAMPP or similar package with PHP >= 7.2.5 (This project is created and tested with PHP version 7.4.9)
 - Create project folder and clone repository
 - Create database 'projects'
 - In project folder open '.env' file and configure DB_USERNAME and DB_PASSWORD if needed. In production environment you need to generate .env with Jenkins and remove it from repository.
