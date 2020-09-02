@@ -100,19 +100,18 @@ class TasksController extends Controller
                 'validation_errors' => ['message' => 'Invalid task id']
             ], 200);
         } else {
-            $data = $task;
-            $project = Tasks::find($id)->project()->get()->first(); // Function project() is defined in model \App\Tasks.php
+            $project = $task->project()->get()->first(); // Function project() is defined in model \App\Tasks.php
             if ($project['deleted']){
                 return response()->json([
                     'code' => -1,
                     'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be displayed']
                 ], 200);
             }
-            $data['project'] = $project['title'];
+            $task['project'] = $project['title'];
             
             return response()->json([
                 'code' => 0,
-                'data' => $data
+                'data' => $task
             ], 200);
         }
     }
