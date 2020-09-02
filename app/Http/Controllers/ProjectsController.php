@@ -104,9 +104,9 @@ class ProjectsController extends Controller
         $project = Projects::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$project->count()){
+        if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']
@@ -157,9 +157,9 @@ class ProjectsController extends Controller
         $project = Projects::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$project->count()){
+        if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']

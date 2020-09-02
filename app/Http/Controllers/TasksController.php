@@ -22,9 +22,9 @@ class TasksController extends Controller
         $project = Projects::where([
             'id' => $request['projects_id'],
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$project->count()){
+        if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid project id'],
@@ -172,9 +172,9 @@ class TasksController extends Controller
         $task = Tasks::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$task->count()){
+        if (is_null($task)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Task not found']
