@@ -92,17 +92,17 @@ class TasksController extends Controller
         $task = Tasks::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$task->count()){
+        if (is_null($task)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid task id']
             ], 200);
         } else {
-            $data = $task[0];
-            $project = Tasks::find($id)->project()->get(); // Function project() is defined in model \App\Tasks.php
-            $data['project'] = $project[0]['title'];
+            $data = $task;
+            $project = Tasks::find($id)->project()->get()->first(); // Function project() is defined in model \App\Tasks.php
+            $data['project'] = $project['title'];
             
             return response()->json([
                 'code' => 0,
@@ -123,9 +123,9 @@ class TasksController extends Controller
         $task = Tasks::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$task->count()){
+        if (is_null($task)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid task id']
@@ -157,7 +157,7 @@ class TasksController extends Controller
         
         return response()->json([
             'code' => 0,
-            'data' => $task[0]
+            'data' => $task
         ], 200);
     }
 

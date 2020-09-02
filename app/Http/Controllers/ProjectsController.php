@@ -77,9 +77,9 @@ class ProjectsController extends Controller
         $project = Projects::where([
             'id' => $id,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        if (!$project->count()){
+        if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid project id']
@@ -87,7 +87,7 @@ class ProjectsController extends Controller
         } else {
             return response()->json([
                 'code' => 0,
-                'data' => $project[0]
+                'data' => $project
             ], 200);
         }
     }

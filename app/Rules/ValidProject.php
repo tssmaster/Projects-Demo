@@ -28,9 +28,9 @@ class ValidProject implements Rule
         $project = Projects::where([
             'id' => $value,
             'deleted' => 0
-        ])->get();
+        ])->get()->first();
         
-        return $project->count() ? true : false;
+        return !is_null($project);
     }
 
     /**
