@@ -9,7 +9,7 @@
                 <div class="card-header">{{ $project ? __('Edit project') : __('Add project') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/') }}/projects/{{ $project ? $project['id'] : 'store' }}">
+                    <form method="POST" action="{{ $project ? route('projects.update', ['id' => $project['id']]) : route('projects.store') }}">
                         @csrf
                         
                         @if ($project ?? '')

@@ -65,14 +65,14 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Get data for the specified project.
+     * View data for the specified project.
      * This function can be modified to return also tasks when needed, using Eloquent model relations, for example Projects::find($id)->tasks()->get().
      * Method tasks() is defined in model \App\Projects.php 
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public function view($id)
     {
         $project = Projects::where([
             'id' => $id,

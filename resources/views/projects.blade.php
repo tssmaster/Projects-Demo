@@ -16,7 +16,7 @@
         @endif        
 
         <div class="mb-3 text-left">
-            <a href="{{ url('/projects/create') }}" class="btn btn-primary">Add new</a>
+            <a href="{{ route('projects.create') }}" class="btn btn-primary">Add new</a>
         </div>
         
         @if ($projects->all() ?? '')
@@ -34,11 +34,11 @@
                 <td>{{ $p['status'] }}</td>
                 <td class="text-center">{{ ceil($p['duration']/(60*60*24)) }}</td>
                 <td class="text-center">
-                    <a href="{{ url('/projects/'.$p['id']) }}">View</a>
+                    <a href="{{ route('projects.view', ['id' => $p['id']]) }}">View</a>
                     <div class="v-divider"></div>
-                    <a href="{{ url('/projects/'.$p['id'].'/edit') }}">Edit</a> 
+                    <a href="{{ route('projects.edit', ['id' => $p['id']]) }}">Edit</a> 
                     <div class="v-divider"></div>
-                    <a href="javascript:if (confirm('Delete project. Are you sure?')) location.href='{{ url('/projects/'.$p['id'].'/delete') }}'">Delete</a>
+                    <a href="javascript:if (confirm('Delete project. Are you sure?')) location.href='{{ route('projects.delete', ['id' => $p['id']]) }}'">Delete</a>
                 </td>
             </tr>
             @endforeach

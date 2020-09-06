@@ -14,7 +14,7 @@
         <li class="list-group-item text-left"><strong>Project:</strong> {{ $task['project'] }}</li>
     </ul>
     
-    <div class="mt-4"><a href="/projects/{{ $task['projects_id'] }}">Back to project details</a></div>
+    <div class="mt-4"><a href="{{ route('projects.view', ['id' => $task['projects_id']]) }}">Back to project details</a></div>
     
     </div>
     </div>

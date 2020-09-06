@@ -24,7 +24,7 @@
     <h3 class="mt-5">Tasks</h4>
     
     <div class="mb-3 text-left">
-        <a href="{{ url('/tasks/create?projects_id='.$project['id']) }}" class="btn btn-primary">Add new</a>
+        <a href="{{ route('tasks.create').'?projects_id='.$project['id'] }}" class="btn btn-primary">Add new</a>
     </div>
     
     <ul class="list-group list-group-flush">
@@ -33,11 +33,11 @@
             {{ $t['title'] }}
             
             <span class="float-right">
-                <a href="{{ url('/tasks/'.$t['id']) }}">View</a>
+                <a href="{{ route('tasks.view', ['id' => $t['id']]) }}">View</a>
                 <div class="v-divider"></div>
-                <a href="{{ url('/tasks/'.$t['id'].'/edit') }}">Edit</a> 
+                <a href="{{ route('tasks.edit', ['id' => $t['id']]) }}">Edit</a> 
                 <div class="v-divider"></div>
-                <a href="javascript:if (confirm('Delete task. Are you sure?')) location.href='{{ url('/tasks/'.$t['id'].'/delete?project_id='.$project['id']) }}'">Delete</a>
+                <a href="javascript:if (confirm('Delete task. Are you sure?')) location.href='{{ route('tasks.delete', ['id' => $t['id']]).'?project_id='.$project['id'] }}'">Delete</a>
             </span>
     
         </li>

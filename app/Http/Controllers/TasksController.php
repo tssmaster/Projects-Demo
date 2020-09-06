@@ -82,12 +82,12 @@ class TasksController extends Controller
     }
 
     /**
-     * Get data for the specified task.
+     * View data for the specified task.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function get($id)
+    public function view($id)
     {
         $task = Tasks::where([
             'id' => $id,

@@ -23,13 +23,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => 'auth:api'], function () {
     
     Route::get('projects', 'ProjectsController@index')->name('projects');
-    Route::get('projects/{id}', 'ProjectsController@get')->name('projects.get');
+    Route::get('projects/{id}', 'ProjectsController@view')->name('projects.view');
     Route::post('projects', 'ProjectsController@store')->name('projects.store');
     Route::put('projects/{id}', 'ProjectsController@update')->name('projects.update');
     Route::delete('projects/{id}', 'ProjectsController@delete')->name('projects.delete');
 
     Route::get('tasks', 'TasksController@index')->name('tasks');
-    Route::get('tasks/{id}', 'TasksController@get')->name('tasks.get');
+    Route::get('tasks/{id}', 'TasksController@view')->name('tasks.view');
     Route::post('tasks', 'TasksController@store')->name('tasks.store');
     Route::put('tasks/{id}', 'TasksController@update')->name('tasks.update');
     Route::delete('tasks/{id}', 'TasksController@delete')->name('tasks.delete');

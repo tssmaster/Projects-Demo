@@ -9,7 +9,7 @@
                 <div class="card-header">{{ $task ? __('Edit task for project') : __('Add task to project') }} <strong>{{ $projectTitle }}</strong></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/') }}/tasks/{{ $task ? $task['id'] : 'store?projects_id='.request('projects_id') }}">
+                    <form method="POST" action="{{ $task ? route('tasks.update', ['id' => $task['id']]) : route('tasks.store').'?projects_id='.request('projects_id') }}">
                         @csrf
                         
                         @if ($task ?? '')
@@ -76,7 +76,7 @@
                 </div>
             </div>
             
-            <div class="mt-4"><a href="/projects/{{ request('projects_id') }}">Back to project details</a></div>
+            <div class="mt-4"><a href="{{ $task ? route('projects.view', ['id' => $task['projects_id']]) : route('projects.view', ['id' => request('projects_id')]) }}">Back to project details</a></div>
             
         </div>
     </div>
