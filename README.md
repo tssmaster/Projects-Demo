@@ -14,7 +14,7 @@ Installation:
 
 - Create database 'projects'
 
-- In project folder open '.env' file and configure DB_USERNAME and DB_PASSWORD
+- In project folder open '.env' file and configure DB_USERNAME, DB_PASSWORD, mail settings
 
 - In project folder open Bash console and type
 
