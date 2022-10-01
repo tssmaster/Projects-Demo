@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectsFrontController;
+use App\Http\Controllers\TasksFrontController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,18 +23,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/projects',             'ProjectsFrontController@index')->name('projects');
-Route::get('/projects/create',      'ProjectsFrontController@create')->name('projects.create');
-Route::post('/projects/store',      'ProjectsFrontController@store')->name('projects.store');
-Route::get('/projects/{id}',        'ProjectsFrontController@view')->name('projects.view');
-Route::get('/projects/{id}/edit',   'ProjectsFrontController@edit')->name('projects.edit');
-Route::patch('/projects/{id}',      'ProjectsFrontController@update')->name('projects.update');
-Route::get('/projects/{id}/delete', 'ProjectsFrontController@delete')->name('projects.delete');
+Route::get('/projects', [ProjectsFrontController::class, 'index'])->name('projects');
+Route::get('/projects/create', [ProjectsFrontController::class, 'create'])->name('projects.create');
+Route::post('/projects/store', [ProjectsFrontController::class, 'store'])->name('projects.store');
+Route::get('/projects/{id}', [ProjectsFrontController::class, 'view'])->name('projects.view');
+Route::get('/projects/{id}/edit', [ProjectsFrontController::class, 'edit'])->name('projects.edit');
+Route::patch('/projects/{id}', [ProjectsFrontController::class, 'update'])->name('projects.update');
+Route::get('/projects/{id}/delete', [ProjectsFrontController::class, 'delete'])->name('projects.delete');
 
 
-Route::get('/tasks/create',      'TasksFrontController@create')->name('tasks.create');
-Route::post('/tasks/store',      'TasksFrontController@store')->name('tasks.store');
-Route::get('/tasks/{id}',        'TasksFrontController@view')->name('tasks.view');
-Route::get('/tasks/{id}/edit',   'TasksFrontController@edit')->name('tasks.edit');
-Route::patch('/tasks/{id}',      'TasksFrontController@update')->name('tasks.update');
-Route::get('/tasks/{id}/delete', 'TasksFrontController@delete')->name('tasks.delete');
+Route::get('/tasks/create', [TasksFrontController::class, 'create'])->name('tasks.create');
+Route::post('/tasks/store', [TasksFrontController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/{id}', [TasksFrontController::class, 'view'])->name('tasks.view');
+Route::get('/tasks/{id}/edit', [TasksFrontController::class, 'edit'])->name('tasks.edit');
+Route::patch('/tasks/{id}', [TasksFrontController::class, 'update'])->name('tasks.update');
+Route::get('/tasks/{id}/delete', [TasksFrontController::class, 'delete'])->name('tasks.delete');

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\TasksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,16 +23,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:api'], function () {
 
-    Route::get('projects', 'ProjectsController@index')->name('projects');
-    Route::get('projects/{id}', 'ProjectsController@view')->name('projects.view');
-    Route::post('projects', 'ProjectsController@store')->name('projects.store');
-    Route::put('projects/{id}', 'ProjectsController@update')->name('projects.update');
-    Route::delete('projects/{id}', 'ProjectsController@delete')->name('projects.delete');
+    Route::get('projects', [ProjectsController::class, 'index'])->name('projects');
+    Route::get('projects/{id}', [ProjectsController::class, 'view'])->name('projects.view');
+    Route::post('projects', [ProjectsController::class, 'store'])->name('projects.store');
+    Route::put('projects/{id}', [ProjectsController::class, 'update'])->name('projects.update');
+    Route::delete('projects/{id}', [ProjectsController::class, 'delete'])->name('projects.delete');
 
-    Route::get('tasks', 'TasksController@index')->name('tasks');
-    Route::get('tasks/{id}', 'TasksController@view')->name('tasks.view');
-    Route::post('tasks', 'TasksController@store')->name('tasks.store');
-    Route::put('tasks/{id}', 'TasksController@update')->name('tasks.update');
-    Route::delete('tasks/{id}', 'TasksController@delete')->name('tasks.delete');
+    Route::get('tasks', [TasksController::class, 'index'])->name('tasks');
+    Route::get('tasks/{id}', [TasksController::class, 'view'])->name('tasks.view');
+    Route::post('tasks', [TasksController::class, 'store'])->name('tasks.store');
+    Route::put('tasks/{id}', [TasksController::class, 'update'])->name('tasks.update');
+    Route::delete('tasks/{id}', [TasksController::class, 'delete'])->name('tasks.delete');
 
 });
