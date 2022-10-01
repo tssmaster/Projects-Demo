@@ -9,7 +9,6 @@ use App\Tasks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-
 class TasksController extends Controller
 {
     /**
