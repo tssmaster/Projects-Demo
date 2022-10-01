@@ -228,11 +228,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-    
+
     'projects_tasks_statuses' => [
         'new', 'pending', 'failed', 'done'
-    ],
-    
-    'api_endpoint' => 'http://127.0.0.1:8000/api/'
-
+    ]
 ];

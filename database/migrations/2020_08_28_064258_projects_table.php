@@ -23,7 +23,7 @@ class ProjectsTable extends Migration
             $table->string('company', 255)->default('');
             $table->boolean('deleted')->default(0); // for soft deleting
             $table->timestamps();
-            
+
             $table->engine = 'InnoDB';
         });
     }

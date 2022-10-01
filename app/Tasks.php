@@ -14,7 +14,7 @@ class Tasks extends Model
     protected $fillable = [
         'projects_id', 'title', 'description', 'status', 'duration', 'deleted'
     ];
-    
+
     /**
      * The attributes that should be hidden for arrays.
      *

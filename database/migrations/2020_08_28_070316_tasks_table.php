@@ -22,7 +22,7 @@ class TasksTable extends Migration
             $table->bigInteger('duration')->unsigned(); // project duration in seconds
             $table->boolean('deleted')->default(0); // for soft deleting
             $table->timestamps();
-            
+
             $table->engine = 'InnoDB';
         });
     }

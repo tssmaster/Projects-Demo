@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ $task ? route('tasks.update', ['id' => $task['id']]) : route('tasks.store').'?projects_id='.request('projects_id') }}">
                         @csrf
-                        
+
                         @if ($task ?? '')
                         @method('PATCH')
                         @endif
@@ -40,7 +40,7 @@
 
                         <div class="form-group row">
                             <label for="status" class="col-md-2 col-form-label text-md-right">Status</label>
-        
+
                             <div class="col-md-6">
                                 <select class="form-control" id="status" name="status">
                                 @foreach($statuses as $s)
@@ -71,13 +71,13 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
-            
+
             <div class="mt-4"><a href="{{ $task ? route('projects.view', ['id' => $task['projects_id']]) : route('projects.view', ['id' => request('projects_id')]) }}">Back to project details</a></div>
-            
+
         </div>
     </div>
 

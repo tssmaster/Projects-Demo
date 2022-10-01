@@ -17,7 +17,7 @@ Installation:
 - In project folder open '.env' file and configure DB_USERNAME and DB_PASSWORD
 
 - In project folder open Bash console and type
-    
+
     **composer install**
     
 - To create database tables in Bash console type
@@ -30,9 +30,9 @@ Installation:
     
 - In browser open http://127.0.0.1:8000/ or http://localhost:8000/. You also can cofigure Apache server to open specific address like http://projects-demo.dev which must serve /public folder in project
 
-- If you want to change API endpoint open /config/app.php and change 'api_endpoint' value, the default is:
+- If you want to change API endpoint open .env and change API_ENDPOINT value, the default is:
 
-    **'api_endpoint' => 'http://127.0.0.1:8000/api/'**
+    **API_ENDPOINT=http://127.0.0.1:8000/api/**
 
 Structure description:
 - API models: /app/Projects.php, /app/Tasks.php

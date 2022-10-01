@@ -29,7 +29,7 @@ class ValidProject implements Rule
             'id' => $value,
             'deleted' => 0
         ])->get()->first();
-        
+
         return !is_null($project);
     }
 

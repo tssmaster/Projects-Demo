@@ -23,7 +23,7 @@ class Projects extends Model
     protected $hidden = [
         'deleted', 'created_at', 'updated_at'
     ];
-    
+
     public function tasks()
     {
         return $this->hasMany(Tasks::class)->orderBy('created_at', 'DESC');

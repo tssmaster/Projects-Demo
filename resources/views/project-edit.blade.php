@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ $project ? route('projects.update', ['id' => $project['id']]) : route('projects.store') }}">
                         @csrf
-                        
+
                         @if ($project ?? '')
                         @method('PATCH')
                         @endif
@@ -40,7 +40,7 @@
 
                         <div class="form-group row">
                             <label for="status" class="col-md-2 col-form-label text-md-right">Status</label>
-        
+
                             <div class="col-md-6">
                                 <select class="form-control" id="status" name="status">
                                 @foreach($statuses as $s)
@@ -93,7 +93,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

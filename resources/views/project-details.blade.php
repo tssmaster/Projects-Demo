@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
     <div class="col-md-8 text-center">
-    
+
     @if(session()->has('message'))
         <div class="alert alert-success mt-2 mb-4">
             {{ session()->get('message') }}
         </div>
-    @endif        
-    
+    @endif
+
     <ul class="list-group">
         <li class="list-group-item active">Project Details</li>
         <li class="list-group-item text-left"><strong>Title:</strong> {{ $project['title'] }}</li>
@@ -20,26 +20,26 @@
         <li class="list-group-item text-left"><strong>Client:</strong> {{ $project['client'] }}</li>
         <li class="list-group-item text-left"><strong>Company:</strong> {{ $project['company'] }}</li>
     </ul>
-    
+
     <h3 class="mt-5">Tasks</h4>
-    
+
     <div class="mb-3 text-left">
         <a href="{{ route('tasks.create').'?projects_id='.$project['id'] }}" class="btn btn-primary">Add new</a>
     </div>
-    
+
     <ul class="list-group list-group-flush">
         @foreach($tasks as $t)
         <li class="list-group-item text-left">
             {{ $t['title'] }}
-            
+
             <span class="float-right">
                 <a href="{{ route('tasks.view', ['id' => $t['id']]) }}">View</a>
                 <div class="v-divider"></div>
-                <a href="{{ route('tasks.edit', ['id' => $t['id']]) }}">Edit</a> 
+                <a href="{{ route('tasks.edit', ['id' => $t['id']]) }}">Edit</a>
                 <div class="v-divider"></div>
                 <a href="javascript:if (confirm('Delete task. Are you sure?')) location.href='{{ route('tasks.delete', ['id' => $t['id']]).'?project_id='.$project['id'] }}'">Delete</a>
             </span>
-    
+
         </li>
         @endforeach
     </ul>
@@ -49,7 +49,7 @@
         {{ $tasks->links() }}
         </div>
     </div>
-    
+
     </div>
     </div>
 </div>

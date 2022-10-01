@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Projects;
-use App\Tasks;
-use Validator;
-use App\Rules\ValidStatus;
 use App\Rules\ValidProject;
+use App\Rules\ValidStatus;
+use App\Tasks;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class TasksController extends Controller
@@ -23,19 +23,19 @@ class TasksController extends Controller
             'id' => $request['projects_id'],
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid project id'],
             ], 200);
         }
-        
+
         $tasks = Tasks::where([
             'projects_id' => $request['projects_id'],
             'deleted' => 0
         ])->orderBy('created_at', 'DESC')->paginate(20);
-        
+
         return response()->json([
             'code' => 0,
             'data' => $tasks,
@@ -57,16 +57,16 @@ class TasksController extends Controller
             'status'      => ['required', new ValidStatus],
             'duration'    => 'required|integer|min:1',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
             ], 200);
         }
-        
+
         $task = Tasks::create([
             'projects_id' => $request['projects_id'],
             'title'       => $request['title'],
@@ -74,7 +74,7 @@ class TasksController extends Controller
             'status'      => $request['status'],
             'duration'    => $request['duration'],
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => $task
@@ -93,7 +93,7 @@ class TasksController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($task)){
             return response()->json([
                 'code' => -1,
@@ -108,7 +108,7 @@ class TasksController extends Controller
                 ], 200);
             }
             $task['project'] = $project['title'];
-            
+
             return response()->json([
                 'code' => 0,
                 'data' => $task
@@ -129,14 +129,14 @@ class TasksController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($task)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid task id']
             ], 200);
         }
-        
+
         // Check if project is deleted
         $project = $task->project()->get()->first();
         if ($project['deleted']){
@@ -145,30 +145,30 @@ class TasksController extends Controller
                 'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be updated']
             ], 200);
         }
-        
+
         $rules = [
             'title'       => 'required|min:3|max:255',
             'description' => 'required',
             'status'      => ['required', new ValidStatus],
             'duration'    => 'required|integer|min:1',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
             ], 200);
         }
-        
+
         Tasks::find($id)->update([
             'title'       => $request['title'],
             'description' => $request['description'],
             'status'      => $request['status'],
             'duration'    => $request['duration'],
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => $task
@@ -187,14 +187,14 @@ class TasksController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($task)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Task not found']
             ], 200);
         }
-        
+
         // Check if project is deleted
         $project = $task->project()->get()->first();
         if ($project['deleted']){
@@ -203,11 +203,11 @@ class TasksController extends Controller
                 'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be deleted']
             ], 200);
         }
-        
+
         Tasks::find($id)->update([
             'deleted' => 1
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => null

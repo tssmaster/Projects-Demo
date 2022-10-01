@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Projects;
-use Validator;
 use App\Rules\ValidStatus;
-use App\Rules\ValidProject;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ProjectsController extends Controller
 {
@@ -39,16 +38,16 @@ class ProjectsController extends Controller
             'client'      => 'required_without:company|min:3|max:255',
             'company'     => 'required_without:client|min:3|max:255',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()){
             return response()->json([
                 'code' => -1,
-                'validation_errors' => $validator->errors(), 
+                'validation_errors' => $validator->errors(),
             ], 200);
         }
-        
+
         $project = Projects::create([
             'title'       => $request['title'],
             'description' => $request['description'],
@@ -57,7 +56,7 @@ class ProjectsController extends Controller
             'client'      => $request['client'] ?? '',
             'company'     => $request['company'] ?? '',
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => $project
@@ -67,7 +66,7 @@ class ProjectsController extends Controller
     /**
      * View data for the specified project.
      * This function can be modified to return also tasks when needed, using Eloquent model relations, for example Projects::find($id)->tasks()->get().
-     * Method tasks() is defined in model \App\Projects.php 
+     * Method tasks() is defined in model \App\Projects.php
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -78,7 +77,7 @@ class ProjectsController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($project)){
             return response()->json([
                 'code' => -1,
@@ -105,14 +104,14 @@ class ProjectsController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']
             ], 200);
         }
-        
+
         $rules = [
             'title'       => 'required|min:3|max:255',
             'description' => 'required',
@@ -121,16 +120,16 @@ class ProjectsController extends Controller
             'client'      => 'required_without:company|min:3|max:255',
             'company'     => 'required_without:client|min:3|max:255',
         ];
-        
+
         $validator = Validator::make($request->all(), $rules);
-        
+
         if ($validator->fails()){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
             ], 200);
         }
-        
+
         Projects::find($id)->update([
             'title'       => $request['title'],
             'description' => $request['description'],
@@ -139,7 +138,7 @@ class ProjectsController extends Controller
             'client'      => $request['client'] ?? '',
             'company'     => $request['company'] ?? '',
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => $project
@@ -158,18 +157,18 @@ class ProjectsController extends Controller
             'id' => $id,
             'deleted' => 0
         ])->get()->first();
-        
+
         if (is_null($project)){
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']
             ], 200);
         }
-        
+
         Projects::find($id)->update([
             'deleted' => 1
         ]);
-        
+
         return response()->json([
             'code' => 0,
             'data' => null
