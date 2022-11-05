@@ -41,7 +41,7 @@ class ProjectsController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
@@ -78,7 +78,7 @@ class ProjectsController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($project)){
+        if (is_null($project)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid project id']
@@ -105,7 +105,7 @@ class ProjectsController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($project)){
+        if (is_null($project)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']
@@ -123,7 +123,7 @@ class ProjectsController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
@@ -158,7 +158,7 @@ class ProjectsController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($project)){
+        if (is_null($project)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Project not found']

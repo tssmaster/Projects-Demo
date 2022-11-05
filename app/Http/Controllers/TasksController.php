@@ -23,7 +23,7 @@ class TasksController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($project)){
+        if (is_null($project)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid project id'],
@@ -59,7 +59,7 @@ class TasksController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
@@ -93,14 +93,14 @@ class TasksController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($task)){
+        if (is_null($task)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid task id']
             ], 200);
         } else {
             $project = $task->project()->get()->first(); // Function project() is defined in model \App\Tasks.php
-            if ($project['deleted']){
+            if ($project['deleted']) {
                 return response()->json([
                     'code' => -1,
                     'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be displayed']
@@ -129,7 +129,7 @@ class TasksController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($task)){
+        if (is_null($task)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Invalid task id']
@@ -138,7 +138,8 @@ class TasksController extends Controller
 
         // Check if project is deleted
         $project = $task->project()->get()->first();
-        if ($project['deleted']){
+
+        if ($project['deleted']) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be updated']
@@ -154,7 +155,7 @@ class TasksController extends Controller
 
         $validator = Validator::make($request->all(), $rules);
 
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => $validator->errors(),
@@ -187,7 +188,7 @@ class TasksController extends Controller
             'deleted' => 0
         ])->get()->first();
 
-        if (is_null($task)){
+        if (is_null($task)) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'Task not found']
@@ -196,7 +197,8 @@ class TasksController extends Controller
 
         // Check if project is deleted
         $project = $task->project()->get()->first();
-        if ($project['deleted']){
+
+        if ($project['deleted']) {
             return response()->json([
                 'code' => -1,
                 'validation_errors' => ['message' => 'This task is assigned to deleted project and cannot be deleted']

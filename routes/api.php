@@ -34,5 +34,4 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('tasks', [TasksController::class, 'store'])->name('tasks.store');
     Route::put('tasks/{id}', [TasksController::class, 'update'])->name('tasks.update');
     Route::delete('tasks/{id}', [TasksController::class, 'delete'])->name('tasks.delete');
-
 });

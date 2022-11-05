@@ -27,9 +27,9 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'projects?page='.request('page')
+            env('API_ENDPOINT') . 'projects?page=' . request('page')
         );
 
         $data = $response->json()['data'];
@@ -52,14 +52,14 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'projects/'.$id
+            env('API_ENDPOINT') . 'projects/' . $id
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -67,14 +67,14 @@ class ProjectsFrontController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'tasks?projects_id='.$id.'&page='.request('page')
+            env('API_ENDPOINT') . 'tasks?projects_id=' . $id . '&page=' . request('page')
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -83,7 +83,7 @@ class ProjectsFrontController extends Controller
         $projectModel = new ProjectsFront;
 
         // Convert array to Eloquent model object and prepare pagination of items
-        $tasks = $projectModel->paginate($data['data'], $data['total'], $data['per_page'], $data['current_page'], ['path' => '/projects/'.$id]);
+        $tasks = $projectModel->paginate($data['data'], $data['total'], $data['per_page'], $data['current_page'], ['path' => '/projects/' . $id]);
 
         return view('project-details', compact('project', 'tasks'));
     }
@@ -110,14 +110,14 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->post(
-            env('API_ENDPOINT').'projects',
+            env('API_ENDPOINT') . 'projects',
             [
                 'title'       => request('title'),
                 'description' => request('description'),
                 'status'      => request('status'),
-                'duration'    => intval(request('duration'))*60*60*24,
+                'duration'    => intval(request('duration')) * 60 * 60 * 24,
                 'client'      => request('client'),
                 'company'     => request('company'),
             ]
@@ -125,12 +125,12 @@ class ProjectsFrontController extends Controller
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             $errors = $res['validation_errors'];
 
             $validator = Validator::make(request()->all(), []);
 
-            foreach($errors as $key => $val){
+            foreach ($errors as $key => $val) {
                 $validator->getMessageBag()->add($key, $val[0]);
             }
 
@@ -150,14 +150,14 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'projects/'.$id
+            env('API_ENDPOINT') . 'projects/' . $id
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -177,14 +177,14 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->put(
-            env('API_ENDPOINT').'projects/'.$id,
+            env('API_ENDPOINT') . 'projects/' . $id,
             [
                 'title'       => request('title'),
                 'description' => request('description'),
                 'status'      => request('status'),
-                'duration'    => intval(request('duration'))*60*60*24,
+                'duration'    => intval(request('duration')) * 60 * 60 * 24,
                 'client'      => request('client'),
                 'company'     => request('company'),
             ]
@@ -192,17 +192,17 @@ class ProjectsFrontController extends Controller
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             $errors = $res['validation_errors'];
 
             // Project id is not valid or other problem
-            if (!empty($errors['message'])){
+            if (!empty($errors['message'])) {
                 return redirect('/projects')->with('message', $res['validation_errors']['message']);
             }
 
             $validator = Validator::make(request()->all(), []);
 
-            foreach($errors as $key => $val){
+            foreach ($errors as $key => $val) {
                 $validator->getMessageBag()->add($key, $val[0]);
             }
 
@@ -222,13 +222,14 @@ class ProjectsFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->delete(
-            env('API_ENDPOINT').'projects/'.$id,
+            env('API_ENDPOINT') . 'projects/' . $id,
         );
+
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 

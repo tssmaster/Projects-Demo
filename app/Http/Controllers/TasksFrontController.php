@@ -17,14 +17,14 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'tasks/'.$id
+            env('API_ENDPOINT') . 'tasks/' . $id
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -42,14 +42,14 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'projects/'.request('projects_id')
+            env('API_ENDPOINT') . 'projects/' . request('projects_id')
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -70,33 +70,33 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->post(
-            env('API_ENDPOINT').'tasks',
+            env('API_ENDPOINT') . 'tasks',
             [
                 'projects_id' => request('projects_id'),
                 'title'       => request('title'),
                 'description' => request('description'),
                 'status'      => request('status'),
-                'duration'    => intval(request('duration'))*60*60*24,
+                'duration'    => intval(request('duration')) * 60 * 60 * 24,
             ]
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             $errors = $res['validation_errors'];
 
             $validator = Validator::make(request()->all(), []);
 
-            foreach($errors as $key => $val){
+            foreach ($errors as $key => $val) {
                 $validator->getMessageBag()->add($key, $val[0]);
             }
 
-            return redirect('/tasks/create?projects_id='.request('projects_id'))->withErrors($validator)->withInput();
+            return redirect('/tasks/create?projects_id=' . request('projects_id'))->withErrors($validator)->withInput();
         }
 
-        return redirect('/projects/'.request('projects_id'))->with('message', 'The task has been added successfully');
+        return redirect('/projects/' . request('projects_id'))->with('message', 'The task has been added successfully');
     }
 
     /**
@@ -109,14 +109,14 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->get(
-            env('API_ENDPOINT').'tasks/'.$id
+            env('API_ENDPOINT') . 'tasks/' . $id
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
@@ -137,37 +137,37 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->put(
-            env('API_ENDPOINT').'tasks/'.$id,
+            env('API_ENDPOINT') . 'tasks/' . $id,
             [
                 'title'       => request('title'),
                 'description' => request('description'),
                 'status'      => request('status'),
-                'duration'    => intval(request('duration'))*60*60*24,
+                'duration'    => intval(request('duration')) * 60 * 60 * 24,
             ]
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             $errors = $res['validation_errors'];
 
             // Project id is not valid or other problem
-            if (!empty($errors['message'])){
+            if (!empty($errors['message'])) {
                 return redirect('/projects')->with('message', $res['validation_errors']['message']);
             }
 
             $validator = Validator::make(request()->all(), []);
 
-            foreach($errors as $key => $val){
+            foreach ($errors as $key => $val) {
                 $validator->getMessageBag()->add($key, $val[0]);
             }
 
             return redirect("/tasks/$id/edit")->withErrors($validator)->withInput();
         }
 
-        return redirect('/projects/'.$res['data']['projects_id'])->with('message', 'The task has been updated successfully');
+        return redirect('/projects/' . $res['data']['projects_id'])->with('message', 'The task has been updated successfully');
     }
 
     /**
@@ -180,17 +180,17 @@ class TasksFrontController extends Controller
     {
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer '.auth()->user()->api_token
+            'Authorization' => 'Bearer ' . auth()->user()->api_token
         ])->delete(
-            env('API_ENDPOINT').'tasks/'.$id,
+            env('API_ENDPOINT') . 'tasks/' . $id,
         );
 
         $res = $response->json();
 
-        if (!empty($res['code']) && $res['code']==-1){
+        if (!empty($res['code']) && $res['code'] == -1) {
             return redirect('/projects')->with('message', $res['validation_errors']['message']);
         }
 
-        return redirect('/projects/'.request('project_id'))->with('message', 'The task has been deleted successfully');
+        return redirect('/projects/' . request('project_id'))->with('message', 'The task has been deleted successfully');
     }
 }

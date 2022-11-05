@@ -24,9 +24,10 @@ class ValidStatus implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (in_array($value, config('app.projects_tasks_statuses'))){
+        if (in_array($value, config('app.projects_tasks_statuses'))) {
             return true;
         }
+
         return false;
     }
 
@@ -37,6 +38,6 @@ class ValidStatus implements Rule
      */
     public function message()
     {
-        return 'Invalid status. Valid values are: '.implode(', ', config('app.projects_tasks_statuses'));
+        return 'Invalid status. Valid values are: ' . implode(', ', config('app.projects_tasks_statuses'));
     }
 }
